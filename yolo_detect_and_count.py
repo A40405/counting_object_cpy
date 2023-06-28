@@ -72,7 +72,7 @@ class YOLOv8_ObjectDetector:
             score = box.conf.item() * 100
             class_id = int(box.cls.item())
 
-            x1 , y1 , x2, y2 = np.array(box.xyxy.tolist()).astype(int)
+            x1 , y1 , x2, y2 = np.array(box.xyxy[0].tolist()).astype(int)
 
             # Print detection info
             if show_cls:
@@ -246,8 +246,7 @@ class YOLOv8_ObjectCounter(YOLOv8_ObjectDetector):
             for box in results.boxes:
                 score = box.conf.item() * 100
 
-                boxx = box.xyxy.tolist()
-
+                boxx = box.xyxy[0].tolist()
                 detections = np.vstack((detections, np.append(boxx, score)))
 
             # Update object tracker 
